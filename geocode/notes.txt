@@ -1,0 +1,31 @@
+app.js
+------------------
+require yargs
+require geocode.js
+
+const argv - sets up argv variable to call yargs.argv with the options of -a for address
+
+geocode.geocodeAddress calls the geocodeAddress function on the geocode.js file required at the top
+geocode.geocodeAddress passes in the address received from the argv.address passed in from terminal
+geocode.geocodeAddress passes in a callback function with the arguments errorMessage and results
+
+if an error is passed into geocode.geocodeAddress then the error message will be printed to the console
+
+else undefined is passed in for the error and the results will be passed in as an object
+results are then stringified and made pretty with 2 spaces and printed to the console
+
+argv are printed to console
+
+geocode.js
+--------------------
+require request
+
+geocodeAddress function is called from app.js passing in the address and a callback function
+encodedAddress takes the passed in address and encodes it for url - replaces spaces in address with %20
+
+request is made to google map api adding the encodedAddress on to end of url for search
+
+if error it runs the callback function passing in the error to be handeled on app.js
+if no error then error argument in callback function is set to undefined and the results object is passed in and handeled in app.js
+
+geocodeAddress function is exported as a module for use and required in app.js 
